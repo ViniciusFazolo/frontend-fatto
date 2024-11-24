@@ -1,0 +1,15 @@
+<app-navbar (open)="toggleNavbar()" />
+<div class="p-3 w-full bg-bluegray-100">
+    <div class="border-round-lg min-h-screen bg-white">
+        <div class="px-4 py-3 w-full flex justify-content-between align-items-center border-bluegray-100" [ngClass]="{'border-bottom-1': title}">
+            <h3>{{title}}</h3>
+            @if (btnTitle) {
+                <p-button [label]="btnTitle" icon="pi pi-plus" severity="success" (onClick)="btnNew()"/>
+            }
+        </div>
+
+        <div class="px-4 py-3">
+            <ng-content />
+        </div>
+    </div>
+</div>

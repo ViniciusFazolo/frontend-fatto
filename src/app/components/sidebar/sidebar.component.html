@@ -1,0 +1,24 @@
+<div class="card flex justify-content-center">
+    <p-sidebar [(visible)]="show" (onHide)="close()">
+        <div class="flex flex-column">
+            <a routerLink="" class="p-3 border-round-lg text-sm no-underline text-gray-700 hover:bg-blue-400 hover:text-white mb-1 transition-linear transition-duration-150 flex align-items-center"
+                [routerLinkActive]="'bg-blue-400 text-white'"
+                [routerLinkActiveOptions]="{exact: true}"
+                (click)="close()"
+                >
+                <i class="pi pi-home mr-3"></i>
+                Página Inicial
+            </a>
+
+            <a routerLink="/tarefa" class="p-3 border-round-lg text-sm no-underline text-gray-700 hover:bg-blue-400 hover:text-white mb-1 transition-linear transition-duration-150 flex align-items-center"
+                [routerLinkActive]="'bg-blue-400 text-white'"
+                [routerLinkActiveOptions]="{exact: true}"
+                (click)="close()"
+                >
+                <i class="pi pi-list mr-3"></i>
+                Tarefa
+            </a>
+
+        </div>
+    </p-sidebar>
+</div>

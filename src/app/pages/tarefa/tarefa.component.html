@@ -1,0 +1,60 @@
+<app-layout-base [title]="'Listagem de tarefas'" [btnTitle]="'Novo'" (toggleDialog)="toggleDialog()">
+    <p-toast />
+    <p-confirmPopup />
+    <p-table [value]="items" [tableStyle]="{ 'min-width': '50rem' }">
+        <ng-template pTemplate="header">
+            <tr>
+                <th>ID</th>
+                <th>Nome da Tarefa</th>
+                <th>Custo</th>
+                <th>Data Limite</th>
+                <th>Ações</th>
+            </tr>
+        </ng-template>
+
+        <ng-template pTemplate="body" let-item>
+            <tr [ngClass]="{'bg-yellow-400' : item.custo > 1000}" (mouseenter)="mouseEnterTableRow(item.id)">
+                <td>{{ item.id }}</td>
+                <td>{{ item.nomeTarefa }}</td>
+                <td>{{item.custo | currency: 'BRL'}}</td>
+                <td>{{item.dataLimite | date : 'dd/MM/yyyy'}}</td>
+                <td>
+                    <p-button label="Editar" icon="pi pi-pencil" size="small" class="mr-1"
+                        (onClick)="handleEdit(item.id!)" />
+                    <p-button label="Excluir" icon="pi pi-trash" size="small" class="mr-1" severity="danger"
+                        (onClick)="handleDelete($event, item.id!)" />
+                    <!-- botoes de subir ou descer tarefa -->
+                    <p-button *ngIf="rowID === item.id && item.id !== items[0].id" icon="pi pi-arrow-up" size="small"
+                        class="mr-1" [outlined]="true" severity="secondary" (onClick)="arrowUp(item.id)"></p-button>
+                    <p-button *ngIf="rowID === item.id && item.id !== items[items.length - 1].id"
+                        icon="pi pi-arrow-down" size="small" class="mr-1" [outlined]="true" severity="secondary"
+                        (onClick)="arrowDown(item.id)"></p-button>
+                </td>
+            </tr>
+        </ng-template>
+    </p-table>
+
+    @if (isDialogOpen) {
+    <app-dialog [visible]="isDialogOpen" (closeDialog)="toggleDialog()"
+        [header]="itemToEdit ? 'Editar Ator' : 'Novo ator'">
+        <form (ngSubmit)="handleSave()" [formGroup]="formGroup">
+            <div class="mb-3 w-full">
+                <label for="" class="block mb-2">Nome da Tarefa: *</label>
+                <input type="text" id="nometarefa" formControlName="nomeTarefa"
+                    class="text-base text-color surface-overlay p-2 border-1 border-solid surface-border border-round appearance-none outline-none focus:border-primary w-full">
+            </div>
+            <div class="mb-3 w-full">
+                <label for="custo" class="block mb-2">Custo: *</label>
+                <input type="number" id="custo" formControlName="custo"
+                    class="text-base text-color surface-overlay p-2 border-1 border-solid surface-border border-round appearance-none outline-none focus:border-primary w-full">
+            </div>
+            <div class="mb-3 w-full">
+                <label for="dataLimite" class="block mb-2">Data Limite: *</label>
+                <input type="date" id="dataLimite" formControlName="dataLimite"
+                    class="text-base text-color surface-overlay p-2 border-1 border-solid surface-border border-round appearance-none outline-none focus:border-primary w-full">
+            </div>
+            <p-button label="Salvar" type="submit" severity="success" icon="pi pi-save" />
+        </form>
+    </app-dialog>
+    }
+</app-layout-base>
