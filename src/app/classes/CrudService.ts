@@ -17,7 +17,7 @@ export class CrudService<T extends {id?: number}> {
   }
 
   update(obj: T): Observable<T> {
-    return this.httpClient.put<T>(`${this.url}/update`, obj);
+    return this.httpClient.put<T>(`${this.url}/${obj?.id}`, obj);
   }
 
   delete(id: number): Observable<string> {
