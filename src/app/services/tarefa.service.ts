@@ -13,6 +13,6 @@ export class TarefaService extends CrudService<Tarefa>{
   }
 
   orderItems(itemToDownID:number, itemToUpID:number){
-    return this.http.get<void>(`${environment.apiUrl}/api/tarefas/${itemToDownID}/${itemToUpID}`);
+    return this.http.get<void>(`${environment.apiUrlProduction}/api/tarefas/${itemToDownID}/${itemToUpID}`);
   }
 }
