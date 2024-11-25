@@ -9,7 +9,7 @@ import { Tarefa } from '../interfaces/tarefa';
 })
 export class TarefaService extends CrudService<Tarefa>{
   constructor(httpClient: HttpClient, private http: HttpClient) {
-    super(httpClient, `${environment.apiUrl}/api/tarefas`)
+    super(httpClient, `${environment.apiUrlProduction}/api/tarefas`)
   }
 
   orderItems(itemToDownID:number, itemToUpID:number){
