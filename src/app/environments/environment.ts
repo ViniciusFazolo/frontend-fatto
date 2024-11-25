@@ -1,3 +1,4 @@
 export const environment = {
-    apiUrl: "http://localhost:8080"
+    apiUrlDevelopment: "http://localhost:8080",
+    apiUrlProduction: "https://backend-fatto.onrender.com",
 }
