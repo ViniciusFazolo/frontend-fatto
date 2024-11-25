@@ -13,7 +13,7 @@
         </ng-template>
 
         <ng-template pTemplate="body" let-item>
-            <tr [ngClass]="{'bg-yellow-400' : item.custo > 1000}" (mouseenter)="mouseEnterTableRow(item.id)">
+            <tr [ngClass]="{'bg-yellow-100' : item.custo > 1000}" (mouseenter)="mouseEnterTableRow(item.id)">
                 <td>{{ item.id }}</td>
                 <td>{{ item.nomeTarefa }}</td>
                 <td>{{item.custo | currency: 'BRL'}}</td>
