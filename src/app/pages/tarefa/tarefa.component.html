@@ -56,7 +56,7 @@
                 <input type="date" id="dataLimite" formControlName="dataLimite"
                     class="text-base text-color surface-overlay p-2 border-1 border-solid surface-border border-round appearance-none outline-none focus:border-primary w-full">
             </div>
-            <p-button label="Salvar" type="submit" severity="success" icon="pi pi-save" />
+            <p-button label="Salvar" type="submit" severity="success" icon="pi pi-save" [disabled]="buttonDisabled"/>
         </form>
     </app-dialog>
     }

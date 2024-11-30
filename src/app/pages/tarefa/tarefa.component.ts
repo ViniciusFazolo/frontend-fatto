@@ -44,6 +44,7 @@ export class TarefaComponent implements OnInit {
   itemToEdit!: Tarefa | null;
   ator: string = '';
   rowID: number | null = null;
+  buttonDisabled: boolean = false;
   formGroup: FormGroup;
 
   constructor(
@@ -90,7 +91,6 @@ export class TarefaComponent implements OnInit {
         summary: 'Aviso',
         detail: 'Preencha todos os campos',
       });
-      console.log('aqui');
       return;
     }
 
@@ -102,6 +102,7 @@ export class TarefaComponent implements OnInit {
   }
 
   handleEdit(id: number) {
+    this.buttonDisabled = true;
     this.tarefaService.listById(id).subscribe({
       next: (res) => {
         this.itemToEdit = res;
@@ -111,6 +112,7 @@ export class TarefaComponent implements OnInit {
           custo: res.custo,
           dataLimite: res.dataLimite,
         });
+        this.buttonDisabled = false
       },
       error: () => {
         this.messageService.add({
@@ -118,6 +120,7 @@ export class TarefaComponent implements OnInit {
           summary: 'Erro',
           detail: 'Erro ao editar ator',
         });
+        this.buttonDisabled = false
       },
     });
   }
@@ -172,6 +175,8 @@ export class TarefaComponent implements OnInit {
       dataLimite: this.formGroup.get('dataLimite')?.value,
     };
 
+    this.buttonDisabled = true;
+
     this.tarefaService.create(obj).subscribe({
       next: () => {
         this.messageService.add({
@@ -181,6 +186,7 @@ export class TarefaComponent implements OnInit {
           life: 3000,
         });
         this.listAll();
+        this.buttonDisabled = false;
         this.toggleDialog();
       },
       error: () => {
@@ -189,11 +195,13 @@ export class TarefaComponent implements OnInit {
           summary: 'Erro',
           detail: 'Erro ao inserir registro',
         });
+        this.buttonDisabled = false
       },
     });
   }
 
   delete(id: number) {
+    this.buttonDisabled = true
     this.tarefaService.delete(id).subscribe({
       next: () => {
         this.messageService.add({
@@ -202,6 +210,7 @@ export class TarefaComponent implements OnInit {
           detail: 'Registro excluído com sucesso',
           life: 3000,
         });
+        this.buttonDisabled = false
         this.listAll();
       },
       error: (err) => {
@@ -217,6 +226,7 @@ export class TarefaComponent implements OnInit {
           summary: 'Erro',
           detail: errorMessage,
         });
+        this.buttonDisabled = false
       },
     });
   }
