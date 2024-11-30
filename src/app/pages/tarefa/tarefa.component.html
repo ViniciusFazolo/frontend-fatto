@@ -1,6 +1,7 @@
 <app-layout-base [title]="'Listagem de tarefas'" [btnTitle]="'Novo'" (toggleDialog)="toggleDialog()">
     <p-toast />
     <p-confirmPopup />
+    @if(items != null && items.length > 0){
     <p-table [value]="items" [tableStyle]="{ 'min-width': '50rem' }">
         <ng-template pTemplate="header">
             <tr>
@@ -33,7 +34,9 @@
             </tr>
         </ng-template>
     </p-table>
-
+    }@else {
+        <p>Não há tarefas</p>
+    }
     @if (isDialogOpen) {
     <app-dialog [visible]="isDialogOpen" (closeDialog)="toggleDialog()"
         [header]="itemToEdit ? 'Editar Ator' : 'Novo ator'">
