@@ -231,6 +231,8 @@ export class TarefaComponent implements OnInit {
 
   arrowUp(itemId: number) {
     const index = this.items.findIndex((item) => item.id === itemId);
+    [this.items[index - 1], this.items[index]] = [this.items[index], this.items[index - 1]];
+
     this.tarefaService.orderItems(this.items[index - 1].id!, this.items[index].id!).subscribe({
       next: () => {
         this.listAll();
@@ -240,6 +242,8 @@ export class TarefaComponent implements OnInit {
 
   arrowDown(itemId: number) {
     const index = this.items.findIndex((item) => item.id === itemId);
+    [this.items[index], this.items[index + 1]] = [this.items[index + 1], this.items[index]];
+
     this.tarefaService.orderItems(this.items[index].id!, this.items[index + 1].id!).subscribe({
       next: () => {
         this.listAll();
