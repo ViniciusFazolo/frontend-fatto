@@ -60,6 +60,7 @@ export class TarefaComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    alert('O banco de dados pode sofrer instabilidades, por ser gratuito :)');
     this.listAll();
   }
 
