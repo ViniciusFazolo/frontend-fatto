@@ -147,6 +147,8 @@ export class TarefaComponent implements OnInit {
       ordemApresentacao: this.itemToEdit?.ordemApresentacao,
     };
 
+    this.buttonDisabled = true;
+
     this.tarefaService.update(obj).subscribe({
       next: () => {
         this.messageService.add({
@@ -157,6 +159,7 @@ export class TarefaComponent implements OnInit {
         });
         this.itemToEdit = null;
         this.listAll();
+        this.buttonDisabled = false;
         this.toggleDialog();
       },
       error: () => {
